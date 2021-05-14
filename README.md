@@ -1,5 +1,8 @@
 # Object detection in an Urban Environment
 
+This is a repository containing the details of the Computer Vision starter module for Udacity Self Driving Car ND.
+
+
 ## Data
 
 For this project, we will be using data from the [Waymo Open dataset](https://waymo.com/open/). The files can be downloaded directly from the website as tar files or from the [Google Cloud Bucket](https://console.cloud.google.com/storage/browser/waymo_open_dataset_v_1_2_0_individual_files/) as individual tf records. 
