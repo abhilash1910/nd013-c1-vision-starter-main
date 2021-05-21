@@ -29,26 +29,25 @@ def split(data_dir):
     train_files, val_file, test_file = np.split(files, [int(.75*len(files)), int(.9*len(files))])
     
     # create dirs and move data files into them
-    
     train = os.path.join(data_dir, 'train')
-    #check if file is present
+    # check if dirs exist and then move the data files in dirs
     try:
         if os.path.exists(train):
             os.makedirs(train)
     except:
         os.makedirs(train,exist_ok=True)
-    #move file
+    
     for file in train_files:
         shutil.move(file, train)
     
     val = os.path.join(data_dir, 'val')
-    #check if file is present
+    
     try:
         if os.path.exists(val):
             os.makedirs(val)
     except:
         os.makedirs(val,exist_ok=True)
-    #move 
+    
     for file in val_file:
         shutil.move(file, val)
     
