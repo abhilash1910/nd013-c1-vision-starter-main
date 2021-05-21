@@ -193,9 +193,40 @@ The dataset presents most of the labels being associated with cars and pedestria
 
 <img src="https://i.imgur.com/8jtDAmz.png">
 
+Images are taken in different environments(subway/highway/city) with different weather conditions(foggy/sunny) and different times of the day(day/night).The bounding boxes are red for the vehicles, green for the cyclists and blue for the pedestrians.
+
+![img1](screenshots/img1.png)![img2](screenshots/img2.png)![img3](screenshots/img3.png)![img4](screenshots/img4.png)![img5](screenshots/img5.png)![img6](screenshots/img6.png)![img7](screenshots/img7.png)![img8](screenshots/img8.png)![img9](screenshots/img9.png)![img10](screenshots/img10.png)
+
+Further analysis of the dataset shows that most images contain vehicles and pedestrians (majority vehicles), and very few sample images have cyclists in them. The chart below shows a bar plot for the distribution of classes (cars, pedestrians, and cyclists), over a collection of 20000 random images in the dataset. The analysis is updated in the "Exploratory Data Analysis.ipynb" notebook.
+
+Below are histogram charts of the distribution of vehicls/cars, pedestrians and, cyclits in 20000
+
+***Distribution of Cars***
+
+![car distribution](screenshots/cars_dist.png)
+
+Here we observed  out of the 20000 images, above 15000 images have at least 10 vehicles present in them and the also the maximum number of vehicles present in an object is about 67.
+
+***Distribution of Pedestrians***
+
+![pedestrians distribution](screenshots/peds_dist.png)
+
+Here we observed that  out of the 20000 images, about 5000 images have at least 10 pedestrians present in them. over 10000 images have at least 1 pedestrian.
+
+***Distribution of Cyclits***
+
+![cyclits distribution](screenshots/cyc_dist.png)
+
+Here we observed there are very few cyclists presnt in images. The msmximum number of cyclits present in an image is just 6 and only about 2400 images have at least 1 cyclit present in them. 
+
+
 #### Cross validation
 
-In this case, we are using 0.75 : 0.15 as the proportion of training and validation data since we are using only 100 tfrecord samples. Overfitting should not be an issue since 75% is under training and rest 10% is for testing.
+We are using 100 tfrecord files. We first shuffle the data randomly and then split into training,testing and validation sets. The reason for random shuffling is to
+reduce the class imbalance in each sample. The shuffling ensures approximately equal distribution of samples in the training,testing and validation datasets.
+
+
+In this case, we are using 0.75 : 0.15 as the proportion of training and validation data since we are using only 100 tfrecord samples. This ensures that we have sufficient data for training as well as validation.We are using 10% (0.1) of the sample as the test set to check the error rate and if the model is overfitting.Ideally,overfitting should not be an issue since 75% is under training and rest 10% is for testing.
 
 ### Training 
 
@@ -205,18 +236,58 @@ The residual network model ([Resnet](http://download.tensorflow.org/models/objec
 
 <img src="https://i.imgur.com/vC9whPX.jpg">
 
+Initially the model was overffiting as the training loss was diverging from the validation loss.The training loss is indicated in orange and the validation loss in blue.This divergence indicates a significant error rate during model validation- an indication that the model is overfitting.
+The precision and recall curves indicate that the performance of the model slowly increases, as both precision and recall start to increase. A high recall rate is often not suitable and the model performance is not that great.
+Precision:
+
+<img src="https://i.imgur.com/z4hSFrv.jpg">
+
+Recall:
+
+<img src="https://i.imgur.com/e3rRSdH.jpg">
+
+
 #### Improve on the reference
+
+To improve on the model performance, the first step was to augment the images by converting them to grayscale with a probability of 0.2. After this, we have clamped the contrast values between 0.6 and 1.0 such that more lighting datapoints are available for classification. A greater part of the images were a bit darker and increasing the brightness to 0.3 provided an even datapoint which could be better classified with the model.The pipeline changes are there in ```pipeline_new.config```
 
 Augmentations applied:
 
 - 0.02 probability of grayscale conversion
 - brightness adjusted to 0.3
+- contrast values between 0.6 and 1.0
+
+Grayscale images:
+
+<img src="https://i.imgur.com/ft9s4xx.png">
+
+Night(Darker) Images:
+
+<img src="https://i.imgur.com/rnhigAX.png">
+
+Contrast Images:
+
+<img src="https://i.imgur.com/pGJiRg3.png">
+
+
 
 The details of the run can be found here : "Explore augmentations.ipynb"
 
 The model loss with augmentation :
 
 <img src="https://i.imgur.com/H4DtUd8.jpg">
+
+Precision with Augmentation:
+
+<img src="https://i.imgur.com/2aGRa93.jpg">
+
+Recall with Augmentation:
+
+<img src="https://i.imgur.com/wtTj62o.jpg">
+
+The loss is lower than the previous loss (un-augmented model). This is an indication of better performance. There should be more samples of augmented datapoints such as
+combining the contrast values with grayscale. Brightness can also be clamped within a limit instead of fixing it to 0.3
+However the most important point is to add more samples of cyclists,pedestrians which are in a low quantity in the dataset. This is an inherent requirement since model biases play an important role in the loss curves and lesser the diversity in training samples, the lower will be the accuracy. 
 
 We have reduced overfitting to an extent with augmentation, however better classification results would be resulting from a more balanced dataset.
 
