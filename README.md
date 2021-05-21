@@ -195,7 +195,7 @@ The dataset presents most of the labels being associated with cars and pedestria
 
 Images are taken in different environments(subway/highway/city) with different weather conditions(foggy/sunny) and different times of the day(day/night).The bounding boxes are red for the vehicles, green for the cyclists and blue for the pedestrians.
 
-![img1](screenshots/img1.png)![img2](screenshots/img2.png)![img3](screenshots/img3.png)![img4](screenshots/img4.png)![img5](screenshots/img5.png)![img6](screenshots/img6.png)![img7](screenshots/img7.png)![img8](screenshots/img8.png)![img9](screenshots/img9.png)![img10](screenshots/img10.png)
+![img1](images/img1.png)![img2](images/img2.png)![img3](images/img3.png)![img4](images/img4.png)![img5](images/img5.png)![img6](images/img6.png)![img7](images/img7.png)![img8](images/img8.png)![img9](images/img9.png)![img10](images/img10.png)
 
 Further analysis of the dataset shows that most images contain vehicles and pedestrians (majority vehicles), and very few sample images have cyclists in them. The chart below shows a bar plot for the distribution of classes (cars, pedestrians, and cyclists), over a collection of 20000 random images in the dataset. The analysis is updated in the "Exploratory Data Analysis.ipynb" notebook.
 
@@ -203,19 +203,19 @@ Below are histogram charts of the distribution of vehicls/cars, pedestrians and,
 
 ***Distribution of Cars***
 
-![car distribution](screenshots/cars_dist.png)
+![car distribution](images/cars_dist.png)
 
 Here we observed  out of the 20000 images, above 15000 images have at least 10 vehicles present in them and the also the maximum number of vehicles present in an object is about 67.
 
 ***Distribution of Pedestrians***
 
-![pedestrians distribution](screenshots/peds_dist.png)
+![pedestrians distribution](images/peds_dist.png)
 
 Here we observed that  out of the 20000 images, about 5000 images have at least 10 pedestrians present in them. over 10000 images have at least 1 pedestrian.
 
 ***Distribution of Cyclits***
 
-![cyclits distribution](screenshots/cyc_dist.png)
+![cyclits distribution](images/cyc_dist.png)
 
 Here we observed there are very few cyclists presnt in images. The msmximum number of cyclits present in an image is just 6 and only about 2400 images have at least 1 cyclit present in them. 
 
